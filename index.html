@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>Roblox Alt Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 80%;
+      margin: 40px auto;
+      text-align: center;
+    }
+    .button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <h1>Roblox Alt Generator</h1>
+    <button class="button" @click="generateAlt">Generate Alt</button>
+    <p>Username: {{ username }}</p>
+    <p>Password: {{ password }}</p>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        username: '',
+        password: ''
+      },
+      methods: {
+        generateAlt() {
+          fetch('https://randomuser.me/api/')
+            .then(response => response.json())
+            .then(data => {
+              this.username = data.results[0].login.username;
+              this.password = Math.random().toString(36).substr(2, 10);
+            });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
